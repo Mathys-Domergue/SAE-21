@@ -1,0 +1,9 @@
+EXPLICATION DES REGLES DE FIREWALL
+
+
+1er règle: accepte les réponses TCP sur le port 80, accepte les pages HTTP
+2e règle: accepte les réponses TCP sur le port 443, accepte les HTTPS
+3e règle: accepte les réponses, tous ce qui passent par le foward
+4e règle: accepte les réponses en ICMP
+5e règle: accepte les réponses en ICMP
+6e règle: rejette les réponses, tous ce qui passent par le foward
