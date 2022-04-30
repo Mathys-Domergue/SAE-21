@@ -1,0 +1,91 @@
+Mathys Domergue											RT1
+
+Journal de Bord
+
+
+Vendredi 25/03
+
+Configuration de la partie virtuelle sur GNS3 (sans plan d’adressage précis), une forme basique.
+
+Aucun problème
+
+Lundi 28/03
+
+Changement de salle, aucun GNS3 sur la machine. Installation d’un GNS3 bancale et
+
+partie virtuelle non fonctionnelle. Nouveau GNS3 (toujours sans plan d’adressage précis).
+
+Mardi 29/03
+
+Continuation de la partie virtuelle très vite abandonner car non exploitable.
+
+Recherche sur les règles de la DMZ et des règles de Firewall pour un routeur Mikrotik.
+
+
+Lundi 04/04
+
+Début de la configuration du routeur Mikrotik avec un plan d’adressage précis, adressage en 192.168.71.MACHINE.
+
+Plage du DHCP : 192.168.71.1 --> 192.168.71.253
+
+Pâte interne du routeur :192.168.71.254
+
+Vendredi 08/04
+
+
+Recherche des règles Firewall pour Mikrotik.
+
+
+Jeudi 14/04
+
+Début de la configuration du Firewall. Premièrement en ligne de commandes  mais très vite abandonner car je n’arrivais pas à le configurer en ligne de commande. Configuration sur la page WEB.
+
+
+/ip firewall filter
+add action=accept chain=forward dst-port=80 protocol=tcp
+add action=accept chain=forward dst-port=443 protocol=tcp
+add action=accept chain=forward
+add action=accept chain=forward protocol=icmp
+add action=accept chain=forward protocol=icmp
+add action=drop chain=foward
+/ip firewall nat
+add action=masquerade chain=srcnat comment="defconf: masquerade" ipsec-policy=out,none out-interface-list=WAN
+
+Vendredi 15/04
+
+
+Commencement de la phase de test.
+
+
+Premier test en faisant du ping.
+
+Premier ping : Routeur --> Machine ?
+Deuxième ping : Machine -->Routeur ?
+Troisième ping : Routeur --> Partie virtuelle ?
+Quatrième ping : Machine --> Partie Virtuelle ?
+
+Jeudi 21/04
+
+Recherche d’une solution pour le probleme de ping.
+
+Test avec une configuration de routage OSPF
+
+Configuration sur le Routeur :
+
+
+/routing ospf network
+add network network=192.168.71.0/24 area=backbone
+add network network=171.69.1.0/24 area=backbone
+
+
+Solution non fonctionnelle
+
+
+Vendredi 22/04
+
+
+J’ai réussi en utilisant mon pc branché sur le routeur 
+
+Toute la configuration du routeur fonctionne avec le firewall
+		
+
